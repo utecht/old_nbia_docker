@@ -1,0 +1,29 @@
+version: '2.1'
+
+services:
+  mysql:
+    image: bitnami/mysql:5.7
+    ports:
+      - '3306:3306'
+    volumes:
+      - './mysql_data:/bitnami/mysql/data'
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_ROOT_PASSWORD=Mysql1!.
+      - MYSQL_DATABASE=nbiadb
+      - MYSQL_USER=nbia_user
+      - MYSQL_PASSWORD=nbia_password
+    healthcheck:
+      test: ['CMD', '/opt/bitnami/scripts/mysql/healthcheck.sh']
+      interval: 15s
+      timeout: 5s
+      retries: 6
+  tomcat:
+    image: jrutecht/tomcat8:latest
+    ports:
+      - '24080:24080'
+      - '8080:8080'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - JAVA_OPTS=-Xms2048m -Xmx2048m
