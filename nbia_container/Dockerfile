@@ -23,7 +23,7 @@ RUN cp -r /opt/nbia/lib/* lib
 COPY ./tomcat-users.xml conf/
 COPY ./context.xml webapps.dist/host-manager/META-INF
 COPY ./context.xml webapps.dist/manager/META-INF
-COPY config/nbia.properties lib/
+# COPY config/nbia.properties lib/
 RUN echo "tomcat.util.scan. StandardJarScanFilter.jarsToSkip=bcprov*.jar" >> conf/catalina.properties
 RUN cp -r webapps.dist/* webapps
 RUN cp -r /opt/nbia/webapps/* webapps

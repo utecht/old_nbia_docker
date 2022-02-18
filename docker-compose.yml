@@ -23,6 +23,8 @@ services:
       retries: 6
   tomcat:
     image: jrutecht/nbiatomcat:latest
+    volumes:
+      - './dicoms:/opt/dicoms'
     ports:
       - '24080:24080'
       - '8080:8080'
@@ -37,8 +39,8 @@ services:
     environment:
       - LDAP_ADMIN_USERNAME=admin
       - LDAP_ADMIN_PASSWORD=adminpassword
-      - LDAP_USERS=user01,user02
-      - LDAP_PASSWORDS=password1,password2
+      - LDAP_USERS=user01,user02,nbiaAdmin
+      - LDAP_PASSWORDS=password1,password2,admin
   solr:
     image: docker.io/bitnami/solr:8
     environment:
