@@ -6,8 +6,9 @@ services:
     ports:
       - '3306:3306'
     volumes:
-      #- './mysql_data:/bitnami/mysql/data'
+      - 'mysql_data:/bitnami/mysql/data'
       - './sql:/docker-entrypoint-initdb.d'
+      - './my.cnf:/opt/bitnami/mysql/conf/my_custom.cnf:ro'
     environment:
       # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
@@ -48,3 +49,6 @@ services:
       - './solr_cores:/opt/solr_conf'
     ports:
       - '8983:8983'
+volumes:
+  mysql_data:
+    driver: local
