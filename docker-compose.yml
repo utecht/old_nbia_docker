@@ -22,7 +22,7 @@ services:
       timeout: 5s
       retries: 6
   tomcat:
-    image: jrutecht/tomcat8:latest
+    image: jrutecht/nbiatomcat:latest
     ports:
       - '24080:24080'
       - '8080:8080'

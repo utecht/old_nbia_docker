@@ -1,4 +1,7 @@
 default: build
 
 build:
-	docker build -t jrutecht/tomcat8:latest .
+	docker build -t jrutecht/nbiatomcat:latest .
+
+push:
+	docker push jrutecht/nbiatomcat:latest
