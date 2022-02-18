@@ -1,3 +1,4 @@
 installer/
 installer.tar
 nbia-install*
+config/prod*

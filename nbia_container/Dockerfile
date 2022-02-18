@@ -23,8 +23,12 @@ RUN cp -r /opt/nbia/lib/* lib
 COPY ./tomcat-users.xml conf/
 COPY ./context.xml webapps.dist/host-manager/META-INF
 COPY ./context.xml webapps.dist/manager/META-INF
-COPY config/nbia.properties conf/
+COPY config/nbia.properties lib/
 RUN echo "tomcat.util.scan. StandardJarScanFilter.jarsToSkip=bcprov*.jar" >> conf/catalina.properties
 RUN cp -r webapps.dist/* webapps
 RUN cp -r /opt/nbia/webapps/* webapps
 RUN export JAVA_OPTS="$JAVA_OPTS -Djava.security.auth.login.config=$CATALINA_HOME/conf/jaas.config"
+RUN sed -i 's/java.util.logging.ConsoleHandler.level = FINE/java.util.logging.ConsoleHandler.level = ALL/g' conf/logging.properties
+COPY config/logging.properties conf/logging.properties
+RUN rm conf/logging.properties
+RUN rm lib/log4j.properties
