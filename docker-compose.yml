@@ -28,7 +28,7 @@ services:
       - '8080:8080'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
-      - JAVA_OPTS=-Xms2048m -Xmx2048m
+      - JAVA_OPTS=-Djava.security.auth.login.config=/usr/local/tomcat/conf/jaas.config
   openldap:
     image: bitnami/openldap:2
     ports:
