@@ -29,6 +29,6 @@ RUN cp -r webapps.dist/* webapps
 RUN cp -r /opt/nbia/webapps/* webapps
 RUN export JAVA_OPTS="$JAVA_OPTS -Djava.security.auth.login.config=$CATALINA_HOME/conf/jaas.config"
 RUN sed -i 's/java.util.logging.ConsoleHandler.level = FINE/java.util.logging.ConsoleHandler.level = ALL/g' conf/logging.properties
-COPY config/logging.properties conf/logging.properties
-RUN rm conf/logging.properties
-RUN rm lib/log4j.properties
+COPY config/log4j.properties lib/log4j.properties
+# RUN rm conf/logging.properties
+# RUN rm lib/log4j.properties
