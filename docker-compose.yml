@@ -33,6 +33,8 @@ services:
       - JAVA_OPTS=-Djava.security.auth.login.config=/usr/local/tomcat/conf/jaas.config -Dlog4j.configuration=/usr/local/tomcat/lib/log4j.properties
   openldap:
     image: bitnami/openldap:2
+    volumes:
+      - './ldapconf:/opt/ldapconf'
     ports:
       - '1389:1389'
       - '1636:1636'
@@ -41,6 +43,7 @@ services:
       - LDAP_ADMIN_PASSWORD=adminpassword
       - LDAP_USERS=user01,user02,nbiaAdmin
       - LDAP_PASSWORDS=password1,password2,admin
+      # - LDAP_CUSTOM_LDIF_DIR=/opt/ldapconf/nbia.ldif
   solr:
     image: docker.io/bitnami/solr:8
     environment:
