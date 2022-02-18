@@ -27,8 +27,8 @@ ENV BITNAMI_APP_NAME="builder" \
     BITNAMI_IMAGE_VERSION="8.5.75-debian-10-r23" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/tomcat/bin:$PATH"
-ADD installer.tar /opt
-COPY install.properties /opt/installer
+ADD --chown=1001:root installer.tar /opt
+COPY --chown=1001:root install.properties /opt/installer
 WORKDIR /opt/installer
 RUN ant
 
@@ -36,10 +36,12 @@ WORKDIR /opt/nbia
 
 RUN cp -r conf /opt/bitnami/tomcat
 RUN cp -r lib /opt/bitnami/tomcat
+COPY --chown=1001:root ./tomcat-users.xml /opt/bitnami/tomcat/conf
+COPY --chown=1001:root ./context.xml /app/host-manager/META-INF
+COPY --chown=1001:root ./context.xml /app/manager/META-INF
+RUN echo "tomcat.util.scan. StandardJarScanFilter.jarsToSkip=bcprov*.jar" >> /opt/bitnami/tomcat/conf/catalina.properties
+RUN cp -r /opt/bitnami/tomcat/webapps_default /app
 RUN cp -r webapps/* /app
-COPY ./tomcat-users.xml /opt/bitnami/tomcat/conf
-COPY ./context.xml /app/host-manager/META-INF
-COPY ./context.xml /app/manager/META-INF
 
 WORKDIR /opt/installer
 

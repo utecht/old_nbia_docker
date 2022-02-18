@@ -38,3 +38,13 @@ services:
       - LDAP_ADMIN_PASSWORD=adminpassword
       - LDAP_USERS=user01,user02
       - LDAP_PASSWORDS=password1,password2
+  solr:
+    image: docker.io/bitnami/solr:8
+    environment:
+      - SOLR_ENABLE_AUTHENTICATION=no
+      - SOLR_CORE_CONF_DIR=/opt/solr_conf
+      - SOLR_CORES=nbia
+    volumes:
+      - './solr_cores:/opt/solr_conf'
+    ports:
+      - '8983:8983'
