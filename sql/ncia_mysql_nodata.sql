@@ -1485,3 +1485,118 @@ INSERT INTO `species` (`species_code`, `species_description`) VALUES
 UNLOCK TABLES;
 
 COMMIT;
+
+drop table if exists `site`;
+CREATE TABLE site (
+    site_pk_id bigint(20) NOT NULL,
+    dp_site_name varchar(40) default NULL,
+    dp_site_id varchar(64) default NULL,
+    trial_dp_pk_id bigint(20) NOT NULL,
+  PRIMARY KEY  (site_pk_id),
+  UNIQUE KEY SITE_PK_ID (site_pk_id),
+  KEY siteNameInd (dp_site_name),
+  CONSTRAINT fk_tdp_st_pk_id
+    FOREIGN KEY (trial_dp_pk_id)
+    REFERENCES trial_data_provenance (trial_dp_pk_id)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+set @row_number = 0;
+
+insert into site(site_pk_id,
+              dp_site_name,
+              dp_site_id, 
+              trial_dp_pk_id)
+select   (@row_number:=@row_number + 1) as pk,
+       sites.dp_site_name,
+sites.dp_site_id,
+       minids.minid
+from  (select  min(trial_dp_pk_id) as minid,
+project
+from trial_data_provenance
+     group by project) minids, 
+( select dp_site_name,
+              dp_site_id,
+              project
+         from trial_data_provenance) sites
+where minids.project=sites.project;
+
+update patient,
+    (select minid, p1.trial_dp_pk_id
+     from (select  distinct tdp.trial_dp_pk_id,
+                 project
+             from  trial_data_provenance tdp,
+               patient p2
+        where  tdp.trial_dp_pk_id=p2.trial_dp_pk_id) p1,
+          (select  min(tdp.trial_dp_pk_id) as minid,
+             project
+             from  trial_data_provenance tdp,
+             patient p2
+        where  tdp.trial_dp_pk_id=p2.trial_dp_pk_id
+       group by  project) p2
+      where p1.project=p2.project) minids
+set  patient.trial_dp_pk_id=minid
+where patient.trial_dp_pk_id=minids.trial_dp_pk_id;
+
+delete from site 
+where trial_dp_pk_id 
+not in (select trial_dp_pk_id 
+      from patient);
+
+update general_image
+set  general_image.trial_dp_pk_id=null;
+
+delete from trial_data_provenance
+     where trial_dp_pk_id
+not in (select trial_dp_pk_id 
+from patient);
+
+CREATE TABLE license (
+license_id BIGINT(20) NOT NULL,
+long_name VARCHAR(255) NULL,
+short_name VARCHAR(50) NULL,
+license_url VARCHAR(255) NULL,
+commercial_use VARCHAR(45) NULL DEFAULT 'YES',
+license_text VARCHAR(255) NULL,
+PRIMARY KEY (license_id)) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO license (license_id, long_name, short_name, license_url, commercial_use, license_text) VALUES ('1', 'Creative Commons Attribution 3.0 Unported License', 'CC BY 3.0', 'http://creativecommons.org/licenses/by/3.0/', 'YES', 'https://creativecommons.org/licenses/by/3.0/');
+INSERT INTO license (license_id, long_name, short_name, license_url, commercial_use, license_text) VALUES ('2', 'Creative Commons Attribution 4.0 International License', 'CC BY 4.0', 'https://creativecommons.org/licenses/by/4.0/', 'YES', 'https://creativecommons.org/licenses/by/4.0/legalcode');
+INSERT INTO license (license_id, long_name, short_name, license_url, commercial_use, license_text) VALUES ('3', 'Creative Commons Attribution-NonCommercial 4.0 International License', 'CC BY-NC 4.0', 'https://creativecommons.org/licenses/by-nc/4.0/', 'NO', 'https://creativecommons.org/licenses/by-nc/4.0/legalcode');
+INSERT INTO license (license_id, long_name, short_name, license_url, commercial_use, license_text) VALUES ('4', 'Creative Commons Attribution-NonCommercial 3.0 Unported License', 'CC BY-NC 3.0', 'https://creativecommons.org/licenses/by-nc/3.0/', 'NO', 'https://creativecommons.org/licenses/by-nc/3.0/legalcode');
+
+ALTER TABLE collection_descriptions 
+ADD COLUMN license_id BIGINT(20) NULL AFTER collection_descriptions_timest,
+ADD INDEX license_id_fk_idx (license_id ASC);
+ALTER TABLE collection_descriptions 
+ADD CONSTRAINT license_id_fk
+FOREIGN KEY (license_id)
+REFERENCES license (license_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;
+
+ALTER TABLE general_series  
+ADD COLUMN exclude_commercial  varchar(4);
+
+ALTER TABLE study 
+ADD COLUMN longitudinal_temporal_event_type varchar(100) NULL,
+ADD COLUMN longitudinal_temporal_offset_from_event DOUBLE PRECISION NULL;
+
+ALTER TABLE general_image 
+ADD COLUMN posda_transfer_id int(20) NULL;
+
+ALTER TABLE general_series 
+ADD COLUMN date_released datetime DEFAULT NULL;
+
+update general_series 
+set date_released = max_submission_timestamp;
+
+ALTER TABLE qc_status_history 
+ADD COLUMN site  varchar(200) DEFAULT NULL,
+ADD COLUMN uri  varchar(200) DEFAULT NULL,
+ADD COLUMN date_released datetime DEFAULT NULL;
+
+ALTER TABLE collection_descriptions 
+ADD COLUMN md5hash varchar(100) DEFAULT NULL;
+
