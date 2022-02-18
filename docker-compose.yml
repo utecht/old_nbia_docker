@@ -41,9 +41,9 @@ services:
     environment:
       - LDAP_ADMIN_USERNAME=admin
       - LDAP_ADMIN_PASSWORD=adminpassword
-      - LDAP_USERS=user01,user02,nbiaAdmin
-      - LDAP_PASSWORDS=password1,password2,admin
-      # - LDAP_CUSTOM_LDIF_DIR=/opt/ldapconf/nbia.ldif
+      # - LDAP_USERS=user01,user02,nbiaAdmin
+      # - LDAP_PASSWORDS=password1,password2,admin
+      - LDAP_CUSTOM_LDIF_DIR=/opt/ldapconf/nbia.ldif
   solr:
     image: docker.io/bitnami/solr:8
     environment:
