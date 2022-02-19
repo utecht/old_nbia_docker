@@ -3,8 +3,6 @@ default: build
 copy:
 	rm -irf installer/
 	cp -r ~/work/NBIA-TCIA/software/target/dist/exploded installer/
-	rm installer/nbia-wars/ncia.war
-	rm installer/nbia-download/nbia-download.war
 
 build:
 	docker build -t jrutecht/nbiatomcat:latest .
