@@ -1296,7 +1296,9 @@ LOCK TABLES `csm_protection_element` WRITE;
 INSERT INTO `csm_protection_element` (`PROTECTION_ELEMENT_ID`, `PROTECTION_ELEMENT_NAME`, `PROTECTION_ELEMENT_DESCRIPTION`, `OBJECT_ID`, `ATTRIBUTE`, `PROTECTION_ELEMENT_TYPE`, `APPLICATION_ID`, `UPDATE_DATE`, `ATTRIBUTE_VALUE`) VALUES
   (1, 'csmupt', 'CSM UPT Super Admin Application Protection Element', 'csmupt', NULL, NULL, 1, sysdate(), NULL),
   (2, 'NCIA', 'NCIA Admin Application Protection Element', 'NCIA', NULL, NULL, 1, sysdate(), NULL),
-  (3, 'NCIA.Common_Element', '', 'NCIA.Common_Element', NULL, NULL, 2, sysdate(), NULL);
+  (3, 'NCIA.Common_Element', '', 'NCIA.Common_Element', NULL, NULL, 2, sysdate(), NULL),
+  (4, 'NCIA.Public', 'NCIA.TRIAL_DATA_PROVENANCE', 'NCIA.Public', 'NCIA.PROJECT', NULL, 2, sysdate(), NULL),
+  (5, 'NCIA.Public//Public', 'NCIA.TRIAL_DATA_PROVENANCE', 'NCIA.Public//Public', 'NCIA.PROJECT//DP_SITE_NAME', NULL, 2, sysdate(), NULL);
 UNLOCK TABLES;
 
 --
@@ -1351,8 +1353,15 @@ INSERT INTO `csm_user` (`USER_ID`, `LOGIN_NAME`, `FIRST_NAME`, `LAST_NAME`, `ORG
 LOCK TABLES `csm_user_group_role_pg` WRITE;
 INSERT INTO `csm_user_group_role_pg` (`USER_GROUP_ROLE_PG_ID`, `USER_ID`, `GROUP_ID`, `ROLE_ID`, `PROTECTION_GROUP_ID`, `UPDATE_DATE`) VALUES
   (1, NULL, 1, 1, 1, sysdate()),
-  (2, 1, NULL, 2, 1, sysdate()),
-  (3, 2, NULL, 1, 1, sysdate());
+  (2, 1, NULL, 1, 1, sysdate()),
+  (3, 1, NULL, 2, 1, sysdate()),
+  (4, 1, NULL, 3, 1, sysdate()),
+  (5, 1, NULL, 4, 1, sysdate()),
+  (6, 1, NULL, 5, 1, sysdate()),
+  (7, 1, NULL, 6, 1, sysdate()),
+  (8, 1, NULL, 7, 1, sysdate()),
+  (9, 1, NULL, 8, 1, sysdate()),
+  (10, 2, NULL, 1, 1, sysdate());
 UNLOCK TABLES;
 
 --
@@ -1372,7 +1381,9 @@ UNLOCK TABLES;
 LOCK TABLES `csm_pg_pe` WRITE;
 INSERT INTO `csm_pg_pe` (`PG_PE_ID`, `PROTECTION_GROUP_ID`, `PROTECTION_ELEMENT_ID`, `UPDATE_DATE`) VALUES
   (1, 1, 2, sysdate()),
-  (2, 2, 3, sysdate());
+  (2, 2, 3, sysdate()),
+  (3, 1, 4, sysdate()),
+  (4, 1, 5, sysdate());
 UNLOCK TABLES;
 
 --
@@ -1600,3 +1611,19 @@ ADD COLUMN date_released datetime DEFAULT NULL;
 ALTER TABLE collection_descriptions 
 ADD COLUMN md5hash varchar(100) DEFAULT NULL;
 
+LOCK TABLES `collection_descriptions` WRITE;
+INSERT INTO `collection_descriptions` (collection_descriptions_pk_id, collection_name, user_name, description, collection_descriptions_timest, license_id, md5hash)
+VALUES(1, 'Public', 'nbiaAdmin', 'The public collection<br>', sysdate(), 1, NULL);
+UNLOCK TABLES;
+
+LOCK TABLES `trial_data_provenance` WRITE;
+INSERT INTO `trial_data_provenance`
+(trial_dp_pk_id, dp_site_name, dp_site_id, project)
+VALUES(1, NULL, NULL, 'Public');
+UNLOCK TABLES;
+
+LOCK TABLES `site` WRITE;
+INSERT INTO `site`
+(site_pk_id, dp_site_name, dp_site_id, trial_dp_pk_id)
+VALUES(1, 'Public', NULL, 1);
+UNLOCK TABLES;

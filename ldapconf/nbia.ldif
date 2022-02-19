@@ -47,9 +47,10 @@ cn: NCIA.ADMIN
 member: cn=nbiaAdmin,ou=users,dc=example,dc=org
 member: cn=user02,ou=users,dc=example,dc=org
 
-dn: cn=NCIA.READ,ou=users,dc=example,dc=org
+dn: cn=General User,ou=users,dc=example,dc=org
 objectClass: groupOfNames
-cn: NCIA.READ
+cn: General User
 member: cn=nbiaAdmin,ou=users,dc=example,dc=org
+member: cn=nbia_guest,ou=users,dc=example,dc=org
 member: cn=user01,ou=users,dc=example,dc=org
 member: cn=user02,ou=users,dc=example,dc=org

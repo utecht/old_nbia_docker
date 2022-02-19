@@ -44,8 +44,8 @@ def main_loop():
     file = File(
         subprocess_invocation_id=0,
         file_id=1,
-        collection="test_collection",
-        site="test_site",
+        collection="Public",
+        site="Public",
         site_id=1,
         batch=1,
         filename="/opt/dicoms/1-001.dcm",
