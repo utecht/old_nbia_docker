@@ -44,11 +44,11 @@ def main_loop():
     file = File(
         subprocess_invocation_id=0,
         file_id=1,
-        collection="a",
-        site="a",
+        collection="test_collection",
+        site="test_site",
         site_id=1,
         batch=1,
-        filename="/dicoms/1-001.dcm",
+        filename="/opt/dicoms/1-001.dcm",
         third_party_analysis_url=None,
     )
     try:

@@ -22,6 +22,12 @@ cn: user02
 sn: Bar2
 userPassword:: cGFzc3dvcmQy
 
+dn: cn=nbia_guest,ou=users,dc=example,dc=org
+objectClass: inetOrgPerson
+cn: nbia_guest
+sn: Bar1
+userPassword: test
+
 dn: cn=nbiaAdmin,ou=users,dc=example,dc=org
 objectClass: inetOrgPerson
 cn: nbiaAdmin
