@@ -1172,11 +1172,11 @@ DROP TABLE IF EXISTS `study_series_number`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `study_series_number` (
-  `PATIENT_PK_ID` tinyint NOT NULL,
-  `PATIENT_ID` tinyint NOT NULL,
-  `PROJECT` tinyint NOT NULL,
-  `STUDY_NUMBER` tinyint NOT NULL,
-  `SERIES_NUMBER` tinyint NOT NULL
+  `PATIENT_PK_ID` bigint NOT NULL,
+  `PATIENT_ID` varchar(50) NOT NULL,
+  `PROJECT` varchar(50) NOT NULL,
+  `STUDY_NUMBER` bigint NOT NULL,
+  `SERIES_NUMBER` bigint NOT NULL
 ) ENGINE=MyISAM */;
 SET character_set_client = @saved_cs_client;
 
