@@ -1,0 +1,1 @@
+set JAVA_OPTS=-Xmx2048m -Djava.security.auth.login.config==/Users/joseph/work/nbia_container/tomcatfiles/conf/jaas.config 
