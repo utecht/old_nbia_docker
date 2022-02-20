@@ -22,15 +22,25 @@ services:
       timeout: 5s
       retries: 6
   tomcat:
-    image: jrutecht/nbiatomcat:latest
+    image: bitnami/tomcat:9.0.58
     volumes:
+      - './tomcatfiles/webapps:/app'
+      - './tomcatfiles/conf/context.xml:/opt/bitnami/tomcat/conf/context.xml'
+      - './tomcatfiles/conf/server.xml:/opt/bitnami/tomcat/conf/server.xml'
+      - './tomcatfiles/conf/jaas.config:/opt/bitnami/tomcat/conf/jaas.config'
+      - './tomcatfiles/conf/tomcat-users.xml:/opt/bitnami/tomcat/conf/tomcat-users.xml'
+      - './tomcatfiles/lib/log4j.properties:/opt/bitnami/tomcat/lib/log4j.properties'
+      - './tomcatfiles/lib/mysql-connector-java-5.1.34.jar:/opt/bitnami/tomcat/lib/mysql-connector-java-5.1.34.jar'
+      - './tomcatfiles/lib/nbia.properties:/opt/bitnami/tomcat/lib/nbia.properties'
+      - './tomcatfiles/lib/UIDNames.properties:/opt/bitnami/tomcat/lib/UIDNames.properties'
+      - './tomcatfiles/lib/userAgreement.txt:/opt/bitnami/tomcat/lib/userAgreement.txt'
       - './dicoms:/opt/dicoms'
     ports:
       - '24080:24080'
       - '8080:8080'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
-      - JAVA_OPTS=-Djava.security.auth.login.config=/usr/local/tomcat/conf/jaas.config -Dlog4j.configuration=/usr/local/tomcat/lib/log4j.properties
+      - TOMCAT_EXTRA_JAVA_OPTS=-Djava.security.auth.login.config=/opt/bitnami/tomcat/conf/jaas.config -Dlog4j.configuration=/opt/bitnami/tomcat/lib/log4j.properties
   openldap:
     image: bitnami/openldap:2
     volumes:
