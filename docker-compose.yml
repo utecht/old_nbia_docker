@@ -24,11 +24,17 @@ services:
   tomcat:
     image: jrutecht/bitnami-tomcat9-jdk18:latest
     volumes:
-      - './webapps:/app'
+      - './webapps/nbia-api.war:/opt/bitnami/tomcat/webapps_default/nbia-api.war'
+      - './webapps/nbia-download.war:/opt/bitnami/tomcat/webapps_default/nbia-download.war'
+      - './webapps/ncia.war:/opt/bitnami/tomcat/webapps_default/ncia.war'
+      - './webapps/ncia-admin/:/opt/bitnami/tomcat/webapps_default/ncia-admin/'
+      - './webapps/ncia-search/:/opt/bitnami/tomcat/webapps_default/ncia-search/'
+      - './webapps/ncia-search-cover/:/opt/bitnami/tomcat/webapps_default/ncia-search-cover/'
+      - './webapps/ncia-uat/:/opt/bitnami/tomcat/webapps_default/ncia-uat/'
+      - './webapps/ncia-viewer/:/opt/bitnami/tomcat/webapps_default/ncia-viewer/'
       - './tomcatfiles/conf/context.xml:/opt/bitnami/tomcat/conf/context.xml'
       - './tomcatfiles/conf/server.xml:/opt/bitnami/tomcat/conf/server.xml'
       - './tomcatfiles/conf/jaas.config:/opt/bitnami/tomcat/conf/jaas.config'
-      - './tomcatfiles/conf/tomcat-users.xml:/opt/bitnami/tomcat/conf/tomcat-users.xml'
       - './tomcatfiles/lib/log4j.properties:/opt/bitnami/tomcat/lib/log4j.properties'
       - './tomcatfiles/lib/mysql-connector-java-5.1.34.jar:/opt/bitnami/tomcat/lib/mysql-connector-java-5.1.34.jar'
       - './tomcatfiles/lib/nbia.properties:/opt/bitnami/tomcat/lib/nbia.properties'
@@ -40,6 +46,9 @@ services:
       - '8080:8080'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
+      - TOMCAT_ALLOW_REMOTE_MANAGEMENT=yes
+      - TOMCAT_USERNAME=admin
+      - TOMCAT_PASSWORD=admin
       - TOMCAT_EXTRA_JAVA_OPTS=-Djava.security.auth.login.config=/opt/bitnami/tomcat/conf/jaas.config -Dlog4j.configuration=/opt/bitnami/tomcat/lib/log4j.properties
   openldap:
     image: bitnami/openldap:2
