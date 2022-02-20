@@ -22,7 +22,7 @@ services:
       timeout: 5s
       retries: 6
   tomcat:
-    image: bitnami/tomcat:9.0.58
+    image: jrutecht/bitnami-tomcat9-jdk18:latest
     volumes:
       - './tomcatfiles/webapps:/app'
       - './tomcatfiles/conf/context.xml:/opt/bitnami/tomcat/conf/context.xml'

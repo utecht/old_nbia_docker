@@ -17,4 +17,3 @@ external:
 	cp config/external_install.properties installer/install.properties
 	ant -f installer/build.xml
 	cp config/log4j.properties ../tomcatfiles/lib
-	cp config/nbia.properties ../tomcatfiles/lib
