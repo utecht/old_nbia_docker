@@ -1930,23 +1930,13 @@ DROP TABLE IF EXISTS `study_series_number`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `study_series_number` (
-  `PATIENT_PK_ID` bigint(20) NOT NULL,
-  `PATIENT_ID` varchar(50) NOT NULL,
-  `PROJECT` varchar(50) NOT NULL,
-  `STUDY_NUMBER` bigint(20) NOT NULL,
-  `SERIES_NUMBER` bigint(20) NOT NULL
+  `PATIENT_PK_ID` tinyint NOT NULL,
+  `PATIENT_ID` tinyint NOT NULL,
+  `PROJECT` tinyint NOT NULL,
+  `STUDY_NUMBER` tinyint NOT NULL,
+  `SERIES_NUMBER` tinyint NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `study_series_number`
---
-
-LOCK TABLES `study_series_number` WRITE;
-/*!40000 ALTER TABLE `study_series_number` DISABLE KEYS */;
-INSERT INTO `study_series_number` VALUES (98304,'C3N-02523','Public',1,1);
-/*!40000 ALTER TABLE `study_series_number` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `submission_history`
@@ -2064,6 +2054,169 @@ LOCK TABLES `workflow` WRITE;
 /*!40000 ALTER TABLE `workflow` DISABLE KEYS */;
 /*!40000 ALTER TABLE `workflow` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+--
+-- Final view structure for view `dicom_image`
+--
+
+/*!50001 DROP TABLE IF EXISTS `dicom_image`*/;
+/*!50001 DROP VIEW IF EXISTS `dicom_image`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50001 VIEW `dicom_image` AS select `gi`.`image_pk_id` AS `IMAGE_PK_ID`,`gi`.`instance_number` AS `INSTANCE_NUMBER`,`gi`.`content_date` AS `CONTENT_DATE`,`gi`.`content_time` AS `CONTENT_TIME`,`gi`.`image_type` AS `IMAGE_TYPE`,`gi`.`acquisition_date` AS `ACQUISITION_DATE`,`gi`.`acquisition_time` AS `ACQUISITION_TIME`,`gi`.`acquisition_number` AS `ACQUISITION_NUMBER`,`gi`.`lossy_image_compression` AS `LOSSY_IMAGE_COMPRESSION`,`gi`.`pixel_spacing` AS `PIXEL_SPACING`,`gi`.`image_orientation_patient` AS `IMAGE_ORIENTATION_PATIENT`,`gi`.`image_position_patient` AS `IMAGE_POSITION_PATIENT`,`gi`.`slice_thickness` AS `SLICE_THICKNESS`,`gi`.`slice_location` AS `SLICE_LOCATION`,`gi`.`i_rows` AS `I_ROWS`,`gi`.`i_columns` AS `I_COLUMNS`,`gi`.`contrast_bolus_agent` AS `CONTRAST_BOLUS_AGENT`,`gi`.`contrast_bolus_route` AS `CONTRAST_BOLUS_ROUTE`,`gi`.`sop_class_uid` AS `SOP_CLASS_UID`,`gi`.`sop_instance_uid` AS `SOP_INSTANCE_UID`,`gi`.`general_series_pk_id` AS `GENERAL_SERIES_PK_ID`,`gi`.`patient_position` AS `PATIENT_POSITION`,`gi`.`source_to_detector_distance` AS `SOURCE_TO_DETECTOR_DISTANCE`,`gi`.`source_subject_distance` AS `SOURCE_SUBJECT_DISTANCE`,`gi`.`focal_spot_size` AS `FOCAL_SPOT_SIZE`,`gi`.`storage_media_file_set_uid` AS `STORAGE_MEDIA_FILE_SET_UID`,`gi`.`dicom_file_uri` AS `DICOM_FILE_URI`,`gi`.`acquisition_datetime` AS `ACQUISITION_DATETIME`,`gi`.`image_comments` AS `IMAGE_COMMENTS`,`gi`.`image_receiving_timestamp` AS `IMAGE_RECEIVING_TIMESTAMP`,`gi`.`curation_timestamp` AS `CURATION_TIMESTAMP`,`gi`.`annotation` AS `ANNOTATION`,`gi`.`submission_date` AS `SUBMISSION_DATE`,`gi`.`dicom_size` AS `DICOM_SIZE`,`gi`.`image_laterality` AS `IMAGE_LATERALITY`,`gi`.`trial_dp_pk_id` AS `TRIAL_DP_PK_ID`,`gi`.`patient_id` AS `PATIENT_ID`,`gi`.`study_instance_uid` AS `STUDY_INSTANCE_UID`,`gi`.`series_instance_uid` AS `SERIES_INSTANCE_UID`,`gi`.`patient_pk_id` AS `PATIENT_PK_ID`,`gi`.`study_pk_id` AS `STUDY_PK_ID`,`gi`.`project` AS `PROJECT`,`gi`.`acquisition_matrix` AS `ACQUISITION_MATRIX`,`gi`.`dx_data_collection_diameter` AS `DX_DATA_COLLECTION_DIAMETER`,`cti`.`kvp` AS `KVP`,`cti`.`scan_options` AS `SCAN_OPTIONS`,`cti`.`data_collection_diameter` AS `DATA_COLLECTION_DIAMETER`,`cti`.`reconstruction_diameter` AS `RECONSTRUCTION_DIAMETER`,`cti`.`gantry_detector_tilt` AS `GANTRY_DETECTOR_TILT`,`cti`.`exposure_time` AS `EXPOSURE_TIME`,`cti`.`x_ray_tube_current` AS `X_RAY_TUBE_CURRENT`,`cti`.`exposure` AS `EXPOSURE`,`cti`.`exposure_in_microas` AS `EXPOSURE_IN_MICROAS`,`cti`.`convolution_kernel` AS `CONVOLUTION_KERNEL`,`cti`.`revolution_time` AS `REVOLUTION_TIME`,`cti`.`single_collimation_width` AS `SINGLE_COLLIMATION_WIDTH`,`cti`.`total_collimation_width` AS `TOTAL_COLLIMATION_WIDTH`,`cti`.`table_speed` AS `TABLE_SPEED`,`cti`.`table_feed_per_rotation` AS `TABLE_FEED_PER_ROTATION`,`cti`.`ct_pitch_factor` AS `CT_PITCH_FACTOR`,`cti`.`anatomic_region_seq` AS `ANATOMIC_REGION_SEQ` from (`general_image` `gi` join `ct_image` `cti`) where (`gi`.`image_pk_id` = `cti`.`image_pk_id`) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `dicom_series`
+--
+
+/*!50001 DROP TABLE IF EXISTS `dicom_series`*/;
+/*!50001 DROP VIEW IF EXISTS `dicom_series`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50001 VIEW `dicom_series` AS select `general_series`.`general_series_pk_id` AS `GENERAL_SERIES_PK_ID`,`general_series`.`body_part_examined` AS `BODY_PART_EXAMINED`,`general_series`.`frame_of_reference_uid` AS `FRAME_OF_REFERENCE_UID`,`general_series`.`series_laterality` AS `SERIES_LATERALITY`,`general_series`.`modality` AS `MODALITY`,`general_series`.`protocol_name` AS `PROTOCOL_NAME`,`general_series`.`series_date` AS `SERIES_DATE`,`general_series`.`series_desc` AS `SERIES_DESC`,`general_series`.`series_instance_uid` AS `SERIES_INSTANCE_UID`,`general_series`.`series_number` AS `SERIES_NUMBER`,`general_series`.`sync_frame_of_ref_uid` AS `SYNC_FRAME_OF_REF_UID`,`general_series`.`study_pk_id` AS `STUDY_PK_ID`,`general_series`.`general_equipment_pk_id` AS `GENERAL_EQUIPMENT_PK_ID` from `general_series` where ((`general_series`.`visibility` = '1') and isnull(`general_series`.`security_group`)) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `dicom_study`
+--
+
+/*!50001 DROP TABLE IF EXISTS `dicom_study`*/;
+/*!50001 DROP VIEW IF EXISTS `dicom_study`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50001 VIEW `dicom_study` AS select `study`.`study_pk_id` AS `STUDY_PK_ID`,`study`.`study_instance_uid` AS `STUDY_INSTANCE_UID`,`study`.`additional_patient_history` AS `ADDITIONAL_PATIENT_HISTORY`,`study`.`study_date` AS `STUDY_DATE`,`study`.`study_desc` AS `STUDY_DESC`,`study`.`admitting_diagnoses_desc` AS `ADMITTING_DIAGNOSES_DESC`,`study`.`admitting_diagnoses_code_seq` AS `ADMITTING_DIAGNOSES_CODE_SEQ`,`study`.`occupation` AS `OCCUPATION`,`study`.`patient_age` AS `PATIENT_AGE`,`study`.`patient_size` AS `PATIENT_SIZE`,`study`.`patient_weight` AS `PATIENT_WEIGHT`,`study`.`study_id` AS `STUDY_ID`,`study`.`study_time` AS `STUDY_TIME`,`study`.`trial_time_point_id` AS `TRIAL_TIME_POINT_ID`,`study`.`trial_time_point_desc` AS `TRIAL_TIME_POINT_DESC`,`study`.`patient_pk_id` AS `PATIENT_PK_ID` from `study` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `manufacturer`
+--
+
+/*!50001 DROP TABLE IF EXISTS `manufacturer`*/;
+/*!50001 DROP VIEW IF EXISTS `manufacturer`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50001 VIEW `manufacturer` AS select distinct `general_equipment`.`manufacturer` AS `MANUFACTURER` from `general_equipment` where `general_equipment`.`general_equipment_pk_id` in (select `general_series`.`general_equipment_pk_id` AS `GENERAL_EQUIPMENT_PK_ID` from `general_series` where (`general_series`.`visibility` = _latin1'1')) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `manufacturer_model_software`
+--
+
+/*!50001 DROP TABLE IF EXISTS `manufacturer_model_software`*/;
+/*!50001 DROP VIEW IF EXISTS `manufacturer_model_software`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50001 VIEW `manufacturer_model_software` AS select distinct `general_equipment`.`general_equipment_pk_id` AS `ID`,`general_equipment`.`manufacturer` AS `MANUFACTURER`,`general_equipment`.`manufacturer_model_name` AS `MODEL`,`general_equipment`.`software_versions` AS `SOFTWARE` from `general_equipment` where `general_equipment`.`general_equipment_pk_id` in (select `general_series`.`general_equipment_pk_id` AS `GENERAL_EQUIPMENT_PK_ID` from `general_series` where (`general_series`.`visibility` = _latin1'1')) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `number_month`
+--
+
+/*!50001 DROP TABLE IF EXISTS `number_month`*/;
+/*!50001 DROP VIEW IF EXISTS `number_month`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50001 VIEW `number_month` AS select `s`.`patient_pk_id` AS `PATIENT_ID`,round(timestampdiff(MONTH,min(`s`.`study_date`),max(`s`.`study_date`)),0) AS `NUMBER_MONTH` from `study` `s` group by `s`.`patient_pk_id` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `saved_query_last_exec`
+--
+
+/*!50001 DROP TABLE IF EXISTS `saved_query_last_exec`*/;
+/*!50001 DROP VIEW IF EXISTS `saved_query_last_exec`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50001 VIEW `saved_query_last_exec` AS select `qh`.`saved_query_pk_id` AS `SAVED_QUERY_PK_ID`,max(`qh`.`query_execute_timestamp`) AS `LAST_EXECUTE_DATE` from (`saved_query` `sq` join `query_history` `qh`) where (`qh`.`saved_query_pk_id` = `sq`.`saved_query_pk_id`) group by `qh`.`saved_query_pk_id` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `software_versions`
+--
+
+/*!50001 DROP TABLE IF EXISTS `software_versions`*/;
+/*!50001 DROP VIEW IF EXISTS `software_versions`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50001 VIEW `software_versions` AS select distinct `general_equipment`.`software_versions` AS `SOFTWARE_VERSIONS` from `general_equipment` where `general_equipment`.`general_equipment_pk_id` in (select `general_series`.`general_equipment_pk_id` AS `GENERAL_EQUIPMENT_PK_ID` from `general_series` where ((`general_series`.`visibility` = _latin1'1') and (`general_equipment`.`software_versions` is not null))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `study_series_number`
+--
+
+/*!50001 DROP TABLE IF EXISTS `study_series_number`*/;
+/*!50001 DROP VIEW IF EXISTS `study_series_number`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50001 VIEW `study_series_number` AS select `g`.`patient_pk_id` AS `PATIENT_PK_ID`,`p`.`patient_id` AS `PATIENT_ID`,`dp`.`project` AS `PROJECT`,count(distinct `g`.`study_pk_id`) AS `STUDY_NUMBER`,count(distinct `g`.`general_series_pk_id`) AS `SERIES_NUMBER` from ((`general_series` `g` join `patient` `p`) join `trial_data_provenance` `dp`) where ((`g`.`visibility` in (1,12)) and (`g`.`patient_pk_id` = `p`.`patient_pk_id`) and (`p`.`trial_dp_pk_id` = `dp`.`trial_dp_pk_id`)) group by `g`.`patient_pk_id`,`p`.`patient_id`,`dp`.`project` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
