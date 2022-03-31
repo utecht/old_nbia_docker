@@ -1125,15 +1125,6 @@ CREATE TABLE `general_equipment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `general_equipment`
---
-
-LOCK TABLES `general_equipment` WRITE;
-/*!40000 ALTER TABLE `general_equipment` DISABLE KEYS */;
-INSERT INTO `general_equipment` VALUES (163840,'Philips',NULL,'Ingenuity CT','4.1',NULL,NULL,NULL);
-/*!40000 ALTER TABLE `general_equipment` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `general_image`
@@ -1248,16 +1239,6 @@ CREATE TABLE `general_image` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `general_image`
---
-
-LOCK TABLES `general_image` WRITE;
-/*!40000 ALTER TABLE `general_image` DISABLE KEYS */;
-INSERT INTO `general_image` VALUES (229376,1,'2002-06-04','133213.653','ORIGINAL','2002-06-04','133213',2.000000,'00',0.781250,'1\\0\\0\\0\\1\\0','-196.8\\-83.9\\-29.67',3.000000,29.670000,512.000000,512.000000,NULL,NULL,'1.2.840.10008.5.1.4.1.1.2','1.3.6.1.4.1.14519.5.2.1.4801.5885.890301857812897912547670620939',196608,'FFS',1040.000000,570.000000,NULL,NULL,'/opt/dicoms/1-001.dcm','20020604133213.050','CHEST W/O',NULL,'2022-02-19 22:59:00',NULL,'2022-02-19',527720.000000,NULL,32768,'C3N-02523','1.3.6.1.4.1.14519.5.2.1.4801.5885.273378882339536463149915111634','1.3.6.1.4.1.14519.5.2.1.4801.5885.113884838686340531426541864075',98304,131072,'Public',NULL,NULL,'6004d4d7e85c8d483950fce35cf81ac8',NULL,NULL,NULL,NULL);
-/*!40000 ALTER TABLE `general_image` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `general_series`
 --
 
@@ -1324,16 +1305,6 @@ CREATE TABLE `general_series` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `general_series`
---
-
-LOCK TABLES `general_series` WRITE;
-/*!40000 ALTER TABLE `general_series` DISABLE KEYS */;
-INSERT INTO `general_series` VALUES (196608,'CT','1.3.6.1.4.1.14519.5.2.1.4801.5885.113884838686340531426541864075',NULL,'2002-06-04','CHEST WITHOUT /Thorax','CHEST W/O, iDose (3)','CHEST',131072,163840,NULL,NULL,NULL,'2002-06-04','CT Body Outside Consultation With Formal Dictation',NULL,'061Y','M',NULL,'060Y',98304,201.000000,NULL,'C3N-02523','1.3.6.1.4.1.14519.5.2.1.4801.5885.907045470620044815886464014844','1',NULL,NULL,'Public','Public','1.3.6.1.4.1.14519.5.2.1.4801.5885.273378882339536463149915111634','2022-02-19 22:54:55',1,'Complete','Yes','NO','',NULL,'2022-02-19 00:00:00');
-/*!40000 ALTER TABLE `general_series` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `gui_action_history`
 --
 
@@ -1348,15 +1319,6 @@ CREATE TABLE `gui_action_history` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `gui_action_history`
---
-
-LOCK TABLES `gui_action_history` WRITE;
-/*!40000 ALTER TABLE `gui_action_history` DISABLE KEYS */;
-INSERT INTO `gui_action_history` VALUES (360448,'2022-02-19','{\"action\":\"SIMPLE_SEARCH\",\"user\":\"nbiaAdmin\"}'),(589824,'2022-02-19','{\"action\":\"SIMPLE_SEARCH\",\"user\":\"nbiaAdmin\"}'),(589825,'2022-02-19','{\"action\":\"SIMPLE_SEARCH\",\"user\":\"nbiaAdmin\"}'),(589826,'2022-02-19','{\"action\":\"SIMPLE_SEARCH\",\"user\":\"nbia_guest\"}');
-/*!40000 ALTER TABLE `gui_action_history` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `hibernate_unique_key`
@@ -1424,15 +1386,6 @@ CREATE TABLE `login_history` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `login_history`
---
-
-LOCK TABLES `login_history` WRITE;
-/*!40000 ALTER TABLE `login_history` DISABLE KEYS */;
-INSERT INTO `login_history` VALUES (393216,'2022-02-19 22:35:16','192.168.112.1'),(622592,'2022-02-19 23:01:13','192.168.112.1'),(622593,'2022-02-19 23:05:27','192.168.112.1');
-/*!40000 ALTER TABLE `login_history` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `manufacturer`
@@ -1599,15 +1552,6 @@ CREATE TABLE `patient` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `patient`
---
-
-LOCK TABLES `patient` WRITE;
-/*!40000 ALTER TABLE `patient` DISABLE KEYS */;
-INSERT INTO `patient` VALUES (98304,'C3N-02523','C3N-02523',NULL,'M',NULL,32768,NULL,NULL,NULL,NULL,NULL,NULL);
-/*!40000 ALTER TABLE `patient` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `qc_status_history`
@@ -1640,15 +1584,6 @@ CREATE TABLE `qc_status_history` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `qc_status_history`
---
-
-LOCK TABLES `qc_status_history` WRITE;
-/*!40000 ALTER TABLE `qc_status_history` DISABLE KEYS */;
-INSERT INTO `qc_status_history` VALUES (327680,'1.3.6.1.4.1.14519.5.2.1.4801.5885.113884838686340531426541864075','nbiaAdmin',NULL,'2022-02-19 22:34:57','1','0','1','1',NULL,'Complete',NULL,'Yes',NULL,NULL,'2022-02-19 00:00:00'),(327681,'1.3.6.1.4.1.14519.5.2.1.4801.5885.113884838686340531426541864075','nbiaAdmin',NULL,'2022-02-19 22:36:49','12','1','1',NULL,'Complete',NULL,'Yes',NULL,NULL,NULL,NULL),(327682,'1.3.6.1.4.1.14519.5.2.1.4801.5885.113884838686340531426541864075','nbiaAdmin',NULL,'2022-02-19 22:37:25',NULL,'12','1',NULL,'Complete','Complete','Yes','Yes',NULL,NULL,'2022-02-19 00:00:00'),(524288,'1.3.6.1.4.1.14519.5.2.1.4801.5885.113884838686340531426541864075','nbiaAdmin',NULL,'2022-02-19 22:55:25','12','0','1',NULL,'Complete','Complete','Yes','Yes',NULL,NULL,'2022-02-19 00:00:00'),(557056,'1.3.6.1.4.1.14519.5.2.1.4801.5885.113884838686340531426541864075','nbiaAdmin',NULL,'2022-02-19 22:59:00','1','12','1',NULL,'Complete',NULL,'Yes',NULL,NULL,NULL,NULL);
-/*!40000 ALTER TABLE `qc_status_history` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `query_history`
@@ -1820,15 +1755,6 @@ CREATE TABLE `site` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `site`
---
-
-LOCK TABLES `site` WRITE;
-/*!40000 ALTER TABLE `site` DISABLE KEYS */;
-INSERT INTO `site` VALUES (1,'Public',NULL,1),(65536,'Public','1',32768);
-/*!40000 ALTER TABLE `site` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `software_versions`
@@ -1912,15 +1838,6 @@ CREATE TABLE `study` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `study`
---
-
-LOCK TABLES `study` WRITE;
-/*!40000 ALTER TABLE `study` DISABLE KEYS */;
-INSERT INTO `study` VALUES (131072,'1.3.6.1.4.1.14519.5.2.1.4801.5885.273378882339536463149915111634','2002-06-04','133012.000000','CT Body Outside Consultation With Formal Dictation',NULL,'',98304,NULL,'-50','Days offset from diagnosis','061Y','060Y',NULL,NULL,NULL,NULL,NULL,NULL);
-/*!40000 ALTER TABLE `study` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `study_series_number`
@@ -1961,15 +1878,6 @@ CREATE TABLE `submission_history` (
 ) ENGINE=InnoDB AUTO_INCREMENT=491521 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `submission_history`
---
-
-LOCK TABLES `submission_history` WRITE;
-/*!40000 ALTER TABLE `submission_history` DISABLE KEYS */;
-INSERT INTO `submission_history` VALUES (294912,'C3N-02523','1.3.6.1.4.1.14519.5.2.1.4801.5885.273378882339536463149915111634','1.3.6.1.4.1.14519.5.2.1.4801.5885.113884838686340531426541864075','1.3.6.1.4.1.14519.5.2.1.4801.5885.890301857812897912547670620939','2022-02-19 22:33:58','Public','Public',0),(491520,'C3N-02523','1.3.6.1.4.1.14519.5.2.1.4801.5885.273378882339536463149915111634','1.3.6.1.4.1.14519.5.2.1.4801.5885.113884838686340531426541864075','1.3.6.1.4.1.14519.5.2.1.4801.5885.890301857812897912547670620939','2022-02-19 22:54:55','Public','Public',1);
-/*!40000 ALTER TABLE `submission_history` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `trial_data_provenance`
@@ -1996,7 +1904,7 @@ CREATE TABLE `trial_data_provenance` (
 
 LOCK TABLES `trial_data_provenance` WRITE;
 /*!40000 ALTER TABLE `trial_data_provenance` DISABLE KEYS */;
-INSERT INTO `trial_data_provenance` VALUES (1,NULL,NULL,'Public'),(32768,NULL,NULL,'Public');
+INSERT INTO `trial_data_provenance` VALUES (1,NULL,NULL,'Public');
 /*!40000 ALTER TABLE `trial_data_provenance` ENABLE KEYS */;
 UNLOCK TABLES;
 

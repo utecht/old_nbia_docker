@@ -1,4 +1,4 @@
-FROM jrutecht/bitnami-tomcat9-jdk18:latest
+FROM jrutecht/bitnami-tomcat9-jdk18:v1.0
 
 COPY tomcatfiles/webapps /opt/bitnami/tomcat/webapps_default
 COPY tomcatfiles/conf /opt/bitnami/tomcat/conf
