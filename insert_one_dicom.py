@@ -40,16 +40,16 @@ class File(NamedTuple):
     third_party_analysis_url: str
 
 
-def main_loop():
+def send_one(file_name):
     file = File(
-        subprocess_invocation_id=0,
-        file_id=1,
-        collection="Public",
-        site="Public",
-        site_id=1,
-        batch=1,
-        filename="/opt/dicoms/1-001.dcm",
-        third_party_analysis_url=None,
+        subprocess_invocation_id=0,  # does not matter
+        file_id=141703361,  # does not matter
+        collection="Col",
+        site="Site",
+        site_id=23153719,
+        batch=5247,  # does not matter
+        filename="/opt/dicoms/{}".format(file_name),
+        third_party_analysis_url=None,  # does not matter
     )
     try:
         _submit_file(file)
@@ -157,7 +157,13 @@ def main():
     TOKEN = login_or_die()
     print(f"logged in to api, token={TOKEN}")
 
-    main_loop()
+    # main_loop()
+    dicoms = [
+        "090.dcm",
+    ]
+    dicoms = os.listdir("dicoms")
+    for dicom in dicoms:
+        send_one(dicom)
 
 
 if __name__ == "__main__":

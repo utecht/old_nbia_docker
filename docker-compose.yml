@@ -24,14 +24,14 @@ services:
   tomcat:
     image: jrutecht/bitnami-tomcat9-jdk18:latest
     volumes:
-      - './webapps/nbia-api.war:/opt/bitnami/tomcat/webapps_default/nbia-api.war'
-      - './webapps/nbia-download.war:/opt/bitnami/tomcat/webapps_default/nbia-download.war'
-      - './webapps/ncia.war:/opt/bitnami/tomcat/webapps_default/ncia.war'
-      - './webapps/nbia-admin/:/opt/bitnami/tomcat/webapps_default/nbia-admin/'
-      - './webapps/nbia-search/:/opt/bitnami/tomcat/webapps_default/nbia-search/'
-      - './webapps/nbia-search-cover/:/opt/bitnami/tomcat/webapps_default/nbia-search-cover/'
-      - './webapps/nbia-uat/:/opt/bitnami/tomcat/webapps_default/nbia-uat/'
-      - './webapps/nbia-viewer/:/opt/bitnami/tomcat/webapps_default/nbia-viewer/'
+      - './webapps/nbia-api.war:/opt/bitnami/tomcat/webapps/nbia-api.war'
+      - './webapps/nbia-download.war:/opt/bitnami/tomcat/webapps/nbia-download.war'
+      - './webapps/ncia.war:/opt/bitnami/tomcat/webapps/ncia.war'
+      - './webapps/nbia-admin/:/opt/bitnami/tomcat/webapps/nbia-admin/'
+      - './webapps/nbia-search/:/opt/bitnami/tomcat/webapps/nbia-search/'
+      - './webapps/nbia-search-cover/:/opt/bitnami/tomcat/webapps/nbia-search-cover/'
+      - './webapps/nbia-uat/:/opt/bitnami/tomcat/webapps/nbia-uat/'
+      - './webapps/nbia-viewer/:/opt/bitnami/tomcat/webapps/nbia-viewer/'
       - './tomcatfiles/conf/context.xml:/opt/bitnami/tomcat/conf/context.xml'
       - './tomcatfiles/conf/server.xml:/opt/bitnami/tomcat/conf/server.xml'
       - './tomcatfiles/conf/jaas.config:/opt/bitnami/tomcat/conf/jaas.config'
@@ -60,9 +60,9 @@ services:
     environment:
       - LDAP_ADMIN_USERNAME=admin
       - LDAP_ADMIN_PASSWORD=adminpassword
-      # - LDAP_USERS=user01,user02,nbiaAdmin
-      # - LDAP_PASSWORDS=password1,password2,admin
-      - LDAP_CUSTOM_LDIF_DIR=/opt/ldapconf/nbia.ldif
+      - LDAP_USERS=user01,user02,nbiaAdmin
+      - LDAP_PASSWORDS=password1,password2,admin
+      # - LDAP_CUSTOM_LDIF_DIR=/opt/ldapconf/nbia.ldif
   solr:
     image: docker.io/bitnami/solr:8
     environment:
