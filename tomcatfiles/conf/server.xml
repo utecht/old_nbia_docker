@@ -38,10 +38,9 @@
     <!-- Editable user database that can also be used by
          UserDatabaseRealm to authenticate users
     -->
-    <Resource name="UserDatabase" auth="Container" type="org.apache.catalina.UserDatabase" description="User database that can be updated and saved" factory="org.apache.catalina.users.MemoryUserDatabaseFactory" pathname="conf/tomcat-users.xml"/>
+ <Resource name="UserDatabase" auth="Container" type="org.apache.catalina.UserDatabase" description="User database that can be updated and saved" factory="org.apache.catalina.users.MemoryUserDatabaseFactory" pathname="conf/tomcat-users.xml"/>
               <Resource name="jdbc/nciaDB" type="javax.sql.DataSource" factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" validationQuery="SELECT 1" testOnBorrow="true" validationInterval="34000" timeBetweenEvictionRunsMillis="30000" maxTotal="50" maxIdle="10" minIdle="1" maxWaitMillis="2000" initialSize="10" removeAbandonedTimeout="60" removeAbandonedOnMaintenance="true" logAbandoned="true" minEvictableIdleTimeMillis="30000" username="nbia_user" password="nbia_password" driverClassName="com.mysql.jdbc.Driver" url="jdbc:mysql://mysql:3306/nbiadb"/>
-<Resource name="jdbc/csm" type="javax.sql.DataSource" factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" validationQuery="SELECT 1" testOnBorrow="true" validationInterval="34000" timeBetweenEvictionRunsMillis="30000" maxTotal="50" maxIdle="10" minIdle="1" maxWaitMillis="2000" initialSize="5" removeAbandonedTimeout="60" removeAbandonedOnMaintenance="true" logAbandoned="true" minEvictableIdleTimeMillis="30000" username="nbia_user" password="nbia_password" driverClassName="com.mysql.jdbc.Driver" url="jdbc:mysql://mysql:3306/nbiadb"/>          
-      
+<Resource name="jdbc/csm" type="javax.sql.DataSource" factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" validationQuery="SELECT 1" testOnBorrow="true" validationInterval="34000" timeBetweenEvictionRunsMillis="30000" maxTotal="50" maxIdle="10" minIdle="1" maxWaitMillis="2000" initialSize="5" removeAbandonedTimeout="60" removeAbandonedOnMaintenance="true" logAbandoned="true" minEvictableIdleTimeMillis="30000" username="nbia_user" password="nbia_password" driverClassName="com.mysql.jdbc.Driver" url="jdbc:mysql://mysql:3306/nbiadb"/>      
   </GlobalNamingResources>
 
   <!-- A "Service" is a collection of one or more "Connectors" that share
@@ -65,7 +64,7 @@
          APR (HTTP/AJP) Connector: /docs/apr.html
          Define a non-SSL/TLS HTTP/1.1 Connector on port 8080
     -->
-    <Connector port="8080" protocol="HTTP/1.1" connectionTimeout="20000" redirectPort="8443"/>
+    <Connector port="8080" protocol="HTTP/1.1" connectionTimeout="200000" redirectPort="8443" maxHttpHeaderSize="65536" maxThreads="500"/>
     <!-- A "Connector" using the shared thread pool-->
     <!--
     <Connector executor="tomcatThreadPool"

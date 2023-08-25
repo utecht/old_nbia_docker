@@ -1451,7 +1451,8 @@ UNLOCK TABLES;
 
 LOCK TABLES `csm_group` WRITE;
 INSERT INTO `csm_group` (`GROUP_ID`, `GROUP_NAME`, `GROUP_DESC`, `UPDATE_DATE`, `APPLICATION_ID`) VALUES
-  (1, 'General User', 'Public user group', sysdate(), 2);
+  (1, 'General User', 'Public user group', sysdate(), 2),
+  (2, 'tcia-team', 'The TCIA Team', sysdate(), 2);
 UNLOCK TABLES;
 
 --
@@ -1512,7 +1513,14 @@ UNLOCK TABLES;
 
 LOCK TABLES `csm_role_privilege` WRITE;
 INSERT INTO `csm_role_privilege` (`ROLE_PRIVILEGE_ID`, `ROLE_ID`, `PRIVILEGE_ID`, `UPDATE_DATE`) VALUES
-  (1, 1, 3, sysdate());
+  (1, 1, 3, sysdate()),
+  (2, 6, 1, sysdate()),
+  (3, 6, 2, sysdate()),
+  (4, 6, 3, sysdate()),
+  (5, 6, 4, sysdate()),
+  (6, 6, 5, sysdate()),
+  (7, 6, 6, sysdate()),
+  (8, 6, 7, sysdate());
 UNLOCK TABLES;
 
 --
@@ -1533,7 +1541,13 @@ LOCK TABLES `csm_user_group_role_pg` WRITE;
 INSERT INTO `csm_user_group_role_pg` (`USER_GROUP_ROLE_PG_ID`, `USER_ID`, `GROUP_ID`, `ROLE_ID`, `PROTECTION_GROUP_ID`, `UPDATE_DATE`) VALUES
   (1, NULL, 1, 1, 1, sysdate()),
   (2, 1, NULL, 2, 1, sysdate()),
-  (3, 2, NULL, 1, 1, sysdate());
+  (3, 2, NULL, 1, 1, sysdate()),
+  (4, 2, NULL, 1, 1, sysdate()),
+  (5, NULL, 2, 1, 2, sysdate()),
+  (6, NULL, 2, 2, 2, sysdate()),
+  (7, NULL, 2, 3, 2, sysdate()),
+  (8, NULL, 2, 4, 2, sysdate()),
+  (9, NULL, 2, 6, 2, sysdate());
 UNLOCK TABLES;
 
 --
@@ -1764,10 +1778,30 @@ update site
 set license_id = (select license_id from collection_descriptions where collection_name=
 (select project from trial_data_provenance tdp where tdp.trial_dp_pk_id=site.trial_dp_pk_id));
 
--- alter table collection_descriptions 
--- drop foreign key license_id_fk;
+alter table collection_descriptions 
+drop foreign key license_id_fk;
 
 -- ALTER TABLE collection_descriptions 
 -- DELETE license_id;
+
+ALTER TABLE trial_data_provenance ADD CONSTRAINT unique_project UNIQUE (project); 
+
+ALTER TABLE general_image MODIFY COLUMN posda_transfer_id VARCHAR(50);
+
+ALTER TABLE mr_image 
+DROP FOREIGN KEY FK_MR_GEN_IMAGE_PK_ID;
+ALTER TABLE mr_image 
+ADD CONSTRAINT FK_MR_GEN_IMAGE_PK_ID
+FOREIGN KEY (IMAGE_PK_ID)
+REFERENCES general_image (image_pk_id)
+ON DELETE CASCADE;
+
+ALTER TABLE ct_image
+DROP FOREIGN KEY fk_image_pk_id;
+ALTER TABLE ct_image
+ADD CONSTRAINT fk_image_pk_id
+FOREIGN KEY (image_pk_id)
+REFERENCES general_image (image_pk_id)
+ON DELETE CASCADE;
 
 COMMIT;

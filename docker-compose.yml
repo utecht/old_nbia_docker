@@ -25,8 +25,8 @@ services:
     image: jrutecht/bitnami-tomcat9-jdk18:latest
     volumes:
       - './webapps/nbia-api.war:/opt/bitnami/tomcat/webapps/nbia-api.war'
-      - './webapps/nbia-download.war:/opt/bitnami/tomcat/webapps/nbia-download.war'
-      - './webapps/ncia.war:/opt/bitnami/tomcat/webapps/ncia.war'
+      # - './webapps/nbia-download.war:/opt/bitnami/tomcat/webapps/nbia-download.war'
+      # - './webapps/ncia.war:/opt/bitnami/tomcat/webapps/ncia.war'
       - './webapps/nbia-admin/:/opt/bitnami/tomcat/webapps/nbia-admin/'
       - './webapps/nbia-search/:/opt/bitnami/tomcat/webapps/nbia-search/'
       - './webapps/nbia-search-cover/:/opt/bitnami/tomcat/webapps/nbia-search-cover/'
@@ -50,19 +50,6 @@ services:
       - TOMCAT_USERNAME=admin
       - TOMCAT_PASSWORD=admin
       - TOMCAT_EXTRA_JAVA_OPTS=-Djava.security.auth.login.config=/opt/bitnami/tomcat/conf/jaas.config -Dlog4j.configuration=/opt/bitnami/tomcat/lib/log4j.properties
-  openldap:
-    image: bitnami/openldap:2
-    volumes:
-      - './ldapconf:/opt/ldapconf'
-    ports:
-      - '1389:1389'
-      - '1636:1636'
-    environment:
-      - LDAP_ADMIN_USERNAME=admin
-      - LDAP_ADMIN_PASSWORD=adminpassword
-      - LDAP_USERS=user01,user02,nbiaAdmin
-      - LDAP_PASSWORDS=password1,password2,admin
-      # - LDAP_CUSTOM_LDIF_DIR=/opt/ldapconf/nbia.ldif
   solr:
     image: docker.io/bitnami/solr:8
     environment:
